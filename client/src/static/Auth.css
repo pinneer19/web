@@ -1,0 +1,70 @@
+/* Auth.css */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Open Sans Semibold', sans-serif;
+
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 700px; /* Adjust the maximum width */
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+a {
+    text-align: center;
+    color: #3498db;
+    text-decoration: none;
+    margin-top: 10px;
+}
+a:hover {
+    text-decoration: underline;
+}
+button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    flex-grow: 1;
+    transition: 0.4s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.submit-group {
+    margin-top: 10px;
+    padding: 10px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}

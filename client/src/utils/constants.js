@@ -1,0 +1,6 @@
+export const USER_ROUTE = '/user'
+export const APPOINTMENT_ROUTE = '/appointments'
+export const CATALOG_ROUTE = '/'
+export const SERVICE_ROUTE = '/service'
+export const LOGIN_ROUTE = '/login'
+export const REGISTRATION_ROUTE = '/registration'
