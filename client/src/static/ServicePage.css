@@ -1,0 +1,38 @@
+/* ServiceDetail.css */
+
+.service-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    min-height: 80vh;
+}
+
+.service-image {
+    margin-right: 30px;
+    border-radius: 40px;
+}
+
+.service-image img {
+    min-height: 300px;
+}
+
+.service-info {
+    max-width: 500px;
+    font-size: 1.4rem;
+    box-shadow: 8px 7px 14px #00538b;
+    padding: 30px 60px;
+    border-radius: 20px;
+    color: #ffffff; /* White text for good contrast */
+    font-family: "Bahnschrift", 'sans-serif';
+    background-color: #51a2d8; /* A shade of blue for a clean and professional look */
+}
+
+.service-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.service-info p {
+    margin-bottom: 10px;
+}

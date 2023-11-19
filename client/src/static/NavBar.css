@@ -54,13 +54,8 @@ body, h1, h2, p, ul, li {
     color: #61dafb;
 }
 
-.button-group {
-    display: flex;
-    align-items: center;
-}
-
 .button {
-    background-color: #61dafb; /* Change button background color */
+    background-color: #61dafb;
     color: black;
     border: none;
     padding: 1rem 2rem;

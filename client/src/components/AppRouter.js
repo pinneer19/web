@@ -3,7 +3,8 @@ import {Routes, Route, Navigate} from 'react-router-dom'
 import {authRoutes, publicRoutes} from "../routes";
 import {CATALOG_ROUTE} from "../utils/constants";
 import {Context} from "../index";
-const AppRouter = () => {
+import {observer} from "mobx-react-lite";
+const AppRouter = observer(() => {
     const {user} = useContext(Context)
     return (
         <Routes>
@@ -16,6 +17,6 @@ const AppRouter = () => {
             <Route path="*" element={<Navigate replace to={CATALOG_ROUTE} />} />
         </Routes>
     );
-};
+});
 
 export default AppRouter;

@@ -4,12 +4,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 90vh;
     font-family: 'Open Sans Semibold', sans-serif;
 
 }
 
-.card {
+.auth-card {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -36,13 +36,13 @@ input {
     font-size: 16px;
 }
 
-a {
+.auth-anchor {
     text-align: center;
     color: #3498db;
     text-decoration: none;
     margin-top: 10px;
 }
-a:hover {
+.auth-anchor:hover {
     text-decoration: underline;
 }
 button {

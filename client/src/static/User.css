@@ -1,0 +1,182 @@
+/* AddServiceModal.css */
+
+/* Style for the main container */
+.service-container {
+    margin: 20px;
+}
+
+/* Style for each service item in the list */
+.service-item {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style for service details */
+.service-details {
+    flex: 2;
+}
+
+.service-user-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: Arial, 'sans-serif';
+}
+
+.service-user-image {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.service-user-info {
+    flex: 1;
+}
+
+/* Style for buttons in each service item */
+.service-buttons button {
+    background-color: #3498db;
+    color: #fff;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 15px;
+    width: 100px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+.service-buttons button:hover {
+    background-color: #2980b9;
+}
+
+/* Style for the Edit button */
+.service-buttons .edit-button {
+    background-color: #1d7fc7;
+}
+
+.service-buttons .edit-button:hover {
+    background-color: #165b8e;
+}
+
+/* Style for the Delete button */
+.service-buttons .delete-button {
+    background-color: #e74c3c; /* Red color for Delete button */
+}
+
+.service-buttons .delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Style for the Details button */
+.service-buttons .details-button {
+    background-color: #f39c12; /* Yellow color for Details button */
+}
+
+.service-buttons .details-button:hover {
+    background-color: #d35400;
+}
+
+.delete-modal-content {
+    height: 300px;
+    display: flex;
+    font-size: 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Bahnschrift, 'sans-serif';
+}
+
+.modal-buttons button {
+    color: #fff;
+    padding: 15px;
+    margin-right: 10px;
+    margin-top: 20px;
+    width: 250px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+input:focus{
+    outline: none;
+}
+
+.cancel-modal-button {
+    background-color: red;
+}
+
+.cancel-modal-button:hover {
+    background-color: #a90000;
+}
+
+.confirm-modal-button {
+    background-color: deepskyblue; /* Blue color for Cancel button */
+}
+
+.confirm-modal-button:hover {
+    background-color: #0079a4;
+}
+
+
+.create-modal-content {
+    width: 100%;
+    font-size: 26px;
+    font-family: Bahnschrift, 'sans-serif';
+}
+
+.create-modal-content input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+}
+
+.create-modal-buttons button {
+    background-color: #2ecc71; /* Green color for Confirm button */
+    color: #fff;
+    padding: 8px 12px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.create-modal-buttons button:hover {
+    background-color: #27ae60;
+}
+
+.create-modal-buttons .create-cancel-button {
+    background-color: #e74c3c; /* Red color for Cancel button */
+}
+
+.create-modal-buttons .create-cancel-button:hover {
+    background-color: #c0392b;
+}
+
+
+.name-create {
+    margin: 0 0 20px 26px;
+    text-align: center;
+    padding: 15px;
+    width: 250px;
+    font-size: 18px;
+    background-color: #27ae60;
+}
+.name-create:hover {
+    transform: scale(0.97);
+    background-color: #1b7441;
+}
