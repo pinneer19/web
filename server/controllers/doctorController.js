@@ -22,7 +22,7 @@ class DoctorController {
     async getAll(req, res, next) {
         try {
             const doctors = await Doctor.find({})
-            return res.json(doctors)
+            return res.json({data: doctors})
         }
         catch(e) {
             return next(ApiError.internal(e.message))

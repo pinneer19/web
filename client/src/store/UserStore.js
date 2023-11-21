@@ -8,6 +8,7 @@ export default class UserStore {
     }
 
     setIsAuth(isAuth) {
+        console.log('auth:' + isAuth)
         this._isAuth = isAuth
     }
     setUser(user) {

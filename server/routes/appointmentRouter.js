@@ -1,9 +1,9 @@
 const Router = require('express')
 const router = new Router()
 const appointmentController = require('../controllers/appointmentController')
-const checkRole = require("../middleware/CheckRoleMiddleware");
+const authMiddleware = require("../middleware/AuthMiddleware");
 
-router.post('/',  checkRole('user'), appointmentController.create)
+router.post('/',  authMiddleware, appointmentController.create)
 router.get('/', appointmentController.getAll)
 router.get('/:doctor', appointmentController.getByDoctor)
 router.get('/:user', appointmentController.getByUser)

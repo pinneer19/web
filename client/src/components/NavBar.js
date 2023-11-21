@@ -1,14 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import '../static/NavBar.css';
 import {observer} from "mobx-react-lite";
 import {useNavigate} from 'react-router-dom'
-import {CATALOG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, USER_ROUTE} from "../utils/constants";
-import {logout} from "../http/userAuth";
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, USER_ROUTE} from "../utils/constants";
+import {getUser, logout} from "../http/userAuth";
+import {set} from "mobx";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
+    const [firstName, setFirstName] = useState('')
     const logoutClick = async () => {
         try {
             await logout()
@@ -19,10 +21,16 @@ const NavBar = observer(() => {
             alert(e.response.data.message)
         }
     }
-
+    useEffect(() => {
+        getUser()
+            .then(res => {
+                setFirstName(res.data.message.firstName)
+            })
+            .catch(e => console.log(e.message))
+    }, []);
     return (<nav className="navbar">
         <div className="brand">
-            <a href="/"><img src={process.env.PUBLIC_URL + '/logo192.png'} height={60} alt="React Image"/>Medical
+            <a href="/"><img src={process.env.PUBLIC_URL + '/logo192.png'} height={60}/>Medical
                 Center</a>
         </div>
         <ul className="nav-links">
@@ -33,7 +41,7 @@ const NavBar = observer(() => {
         </ul>
         {user.isAuth ? (<div>
             <button className="button" onClick={() => navigate(USER_ROUTE)}>
-                User Cabinet
+                Hello, {firstName}!
             </button>
             <button className="button" onClick={() => logoutClick()}>
                 Logout

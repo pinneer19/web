@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
 import '../static/Auth.css'
-import {resolvePath, useLocation, useNavigate} from "react-router-dom";
-import {CATALOG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SERVICE_ROUTE} from "../utils/constants";
-import {login, registration} from "../http/userAuth";
+import {useLocation, useNavigate} from "react-router-dom";
+import {CATALOG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/constants";
+import {facebookAuth, githubAuth, googleAuth, login, registration} from "../http/userAuth";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
@@ -29,7 +29,31 @@ const Auth = observer(() => {
             user.setIsAuth(true)
             navigate(CATALOG_ROUTE)
         } catch (e) {
-            alert(e.response.data.message)
+            alert(e.message)
+        }
+    }
+
+    const googleAuthClick = async () => {
+        try {
+            googleAuth()
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+    const facebookAuthClick = () => {
+        try {
+            facebookAuth()
+        } catch(e) {
+            console.log(e.message)
+        }
+    }
+
+    const githubAuthClick = () => {
+        try {
+            githubAuth()
+        } catch(e) {
+            console.log(e.message)
         }
     }
 
@@ -45,6 +69,21 @@ const Auth = observer(() => {
                         <a className="auth-anchor" href={REGISTRATION_ROUTE}>Don't have an account?</a>
                         <button type="button" onClick={authClick}>Login</button>
                     </div>
+                    <div className="auth-buttons">
+                    <button type="button" className="auth-button" onClick={googleAuthClick}>
+                        <span className="google-icon"></span>
+                        <span>Sign in with Google</span>
+                    </button>
+                    <button type="button" className="auth-button" onClick={githubAuthClick}>
+                        <span className="github-icon"></span>
+                        <span>Sign in with Github</span>
+                    </button>
+                    {/*<button type="button" className="auth-button" onClick={facebookAuthClick}>*/}
+                    {/*    <span className="facebook-icon"></span>*/}
+                    {/*    <span>Sign in with Facebook</span>*/}
+                    {/*</button>*/}
+                    </div>
+
                 </form>
                     :
                     <form>
@@ -55,7 +94,7 @@ const Auth = observer(() => {
                         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
                         <div className="submit-group">
                             <a className="auth-anchor" href={LOGIN_ROUTE}>Already have an account?</a>
-                            <button type="button" onClick={authClick}>Register</button>
+                            <button type="submit" onClick={authClick}>Register</button>
                         </div>
                     </form>
                 }

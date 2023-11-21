@@ -5,6 +5,7 @@ const doctorRouter = require('./doctorRouter')
 const appointmentRouter = require('./appointmentRouter')
 const serviceRouter = require('./serviceRouter')
 
+
 router.use('/user', userRouter)
 router.use('/service', serviceRouter)
 router.use('/doctor', doctorRouter)

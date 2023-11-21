@@ -27,7 +27,7 @@ class UserController {
                 if (err) {
                     return next(err);
                 }
-                return res.json({ message: 'Registration successful', user: newUser });
+                return res.json({message: 'Registration successful', user: newUser});
             })
         } catch (e) {
             return next(ApiError.badRequest(e.message))
@@ -40,22 +40,39 @@ class UserController {
                 return next(err);
             }
             if (!user) {
-                return res.status(401).json({ message: 'Authentication failed' });
+                return res.status(401).json({message: 'Authentication failed(incorrect data)'})
             }
-            req.login(user, function (err) {
+            req.logIn(user, function (err) {
                 if (err) {
                     return next(err);
                 }
-                return res.json({ message: 'Login successful', user });
+                return res.json({message: 'Login successful', user});
             });
         })(req, res, next);
     }
 
+    async googleAuth(req, res, next) {
+        passport.authenticate('google', {scope: ['email', 'profile']})
+    }
+
+    async googleAuthCallback(req, res, next) {
+        passport.authenticate('google', {
+            failureRedirect: '/rest',
+            successRedirect: '/home',
+        })
+    }
+
     async logout(req, res, next) {
         req.logout(function (err) {
-            if (err) { return next(err); }
-            return res.json({ message: 'Logout successful' });
+            if (err) {
+                return next(err);
+            }
+            return res.json({message: 'Logout successful'});
         });
+    }
+
+    async check(req, res, next) {
+        return res.json({message: "Ok"})
     }
 }
 

@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Context} from "../index";
 import '../static/User.css'
 import Modal from "../components/modals/Modal";
+import {deleteService} from "../http/catalogAPI";
 
 const User = () => {
     // <!--  <form method="post" enctype="multipart/form-data">  -->
@@ -10,6 +11,15 @@ const User = () => {
     const [createModalActive, setCreateModalActive] = useState(false);
     const [deleteModalActive, setDeleteModalActive] = useState(false);
     const [selectedService, updateSelectedService] = useState({})
+    const [deletedService, setDeletedService] = useState(0)
+    const onClickDelete = () => {
+        console.log(deletedService)
+        deleteService(deletedService).then((response) => {
+            service.updateService(deletedService);
+            setDeleteModalActive(false);
+        })
+    }
+
     return (
         <div className="service-container">
 
@@ -36,7 +46,10 @@ const User = () => {
                                 setEditModalActive(true);
                             }}>Edit
                             </button>
-                            <button className="delete-button" onClick={() => setDeleteModalActive(true)}>Delete</button>
+                            <button className="delete-button" onClick={() => {
+                                setDeleteModalActive(true);
+                                setDeletedService(service._id)
+                            }}>Delete</button>
                         </div>
                     </li>
                 ))}
@@ -91,7 +104,7 @@ const User = () => {
                         <button className="cancel-modal-button" onClick={() => setDeleteModalActive(false)}>
                             Cancel
                         </button>
-                        <button className="confirm-modal-button">
+                        <button className="confirm-modal-button" onClick={() => onClickDelete()}>
                             Confirm
                         </button>
                     </div>

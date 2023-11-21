@@ -2,95 +2,8 @@ import {makeAutoObservable} from "mobx";
 
 export default class ServiceStore {
     constructor() {
-        this._services = [
-            {
-                name: 'Service 1',
-                description: 'Description for Service 1',
-                doctor: 'Doctor 1',
-                price: 50,
-                img: 'image1.jpg'
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 6',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            },
-            {
-                name: 'Service 2',
-                description: 'Description for Service 2',
-                doctor: 'Doctor 2',
-                price: 75,
-                img: 'image2.jpg',
-            }
-        ];
-        this._doctors = [
-            {
-                first_name: 'firstname1',
-                last_name: 'lastname1',
-                specialization: 'spec'
-            },
-            {
-                first_name: 'firstnam3',
-                last_name: 'lastname451',
-                specialization: 'spec'
-            },
-            {
-                first_name: 'firstname2',
-                last_name: 'lastname3',
-                specialization: 'spec'
-            }
-            ];
+        this._services = [];
+        this._doctors = [];
         this._selectedDoctor = {}
         makeAutoObservable(this)
     }
@@ -112,7 +25,14 @@ export default class ServiceStore {
         console.log(this._selectedDoctor)
     }
     get SelectionDoctor() {
-
         return this._selectedDoctor
+    }
+    updateService(id) {
+        const indexToDelete = this._services.findIndex(item => item._id === id);
+        if (indexToDelete !== -1) {
+            this._services.splice(indexToDelete, 1);
+        } else {
+            console.log('Item not found!');
+        }
     }
 }

@@ -31,8 +31,6 @@ class ServiceController {
 
     async getAll(req, res, next) {
         try {
-
-            Service.countDocuments()
             let {page, limit} = req.query
             page = parseInt(page) || 1
             limit = parseInt(limit) || 10
@@ -52,6 +50,8 @@ class ServiceController {
     async getOne(req, res, next) {
         try {
             const {id} = req.params;
+            if(id === 'search') return next(ApiError.badRequest('Search query cannot be empty!'))
+
             const service = await Service.findById(id);
 
             if (!service) {
@@ -74,6 +74,22 @@ class ServiceController {
             return res.json({message: 'Service deleted successfully'})
         } catch (e) {
             return next(ApiError.internal(e.message));
+        }
+    }
+
+    async search(req, res, next) {
+        try {
+            const { input } = req.params;
+            const searchTerm = input.toLowerCase();
+            const services = await Service.find({
+                $or: [
+                    { name: { $regex: searchTerm, $options: 'i' } },
+                    { description: { $regex: searchTerm, $options: 'i' } },
+                ],
+            });
+            return res.json({ services });
+        } catch (e) {
+            return next(ApiError.badRequest(e.message));
         }
     }
 }
