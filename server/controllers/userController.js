@@ -46,6 +46,7 @@ class UserController {
                 if (err) {
                     return next(err);
                 }
+
                 return res.json({message: 'Login successful', user});
             });
         })(req, res, next);

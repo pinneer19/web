@@ -9,7 +9,7 @@ const ServiceItem = ({service}) => {
     return (
         <div className="card" onClick={() => navigate(SERVICE_ROUTE + `/${service._id}`)}>
             <img
-                src={process.env.PUBLIC_URL + '/logo192.png'}
+                src={process.env.REACT_APP_API_URL + service.img}
                 alt={service.name}
                 className="card-image"
             />

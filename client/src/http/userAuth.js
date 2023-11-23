@@ -1,4 +1,4 @@
-import {$host, $hostFacebook} from './index'
+import {$host} from './index'
 
 export const registration = async (firstName, lastName, email, phoneNumber, password) => {
     const response = await $host.post(

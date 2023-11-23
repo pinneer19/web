@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import '../static/Auth.css'
 import {useLocation, useNavigate} from "react-router-dom";
 import {CATALOG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/constants";
-import {facebookAuth, githubAuth, googleAuth, login, registration} from "../http/userAuth";
+import {facebookAuth, getUser, githubAuth, googleAuth, login, registration} from "../http/userAuth";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
@@ -25,7 +25,7 @@ const Auth = observer(() => {
             } else {
                 response = await registration(firstName, lastName, email, phoneNumber, password)
             }
-            user.setUser(response.user)
+            user.setUser(response.data.user)
             user.setIsAuth(true)
             navigate(CATALOG_ROUTE)
         } catch (e) {

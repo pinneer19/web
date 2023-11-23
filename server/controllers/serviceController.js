@@ -1,18 +1,30 @@
 const Service = require('../models/service')
 const ApiError = require('../error/ApiError')
-const mongoose = require("mongoose");
 const uuid = require('uuid')
 const path = require('path')
-const Doctor = require("../models/doctor");
+const {ObjectId} = require("mongodb");
+const Joi = require('joi')
 
 class ServiceController {
     async create(req, res, next) {
         try {
+
+            const schema = Joi.object({
+                name: Joi.string().required(),
+                description: Joi.string().required(),
+                doctor: Joi.string().required(),
+                price: Joi.number().required(),
+            });
+
+            const { error } = schema.validate(req.body);
+            if (error) {
+                return res.status(400).json({ message: error.details[0].message });
+            }
             const {name, description, doctor, price} = req.body
-            const {img} = req.files
+            const {image} = req.files
 
             let filename = uuid.v4() + ".jpg"
-            img.mv(path.resolve(__dirname, '..', 'static', filename))
+            await image.mv(path.resolve(__dirname, '..', 'static', filename))
 
             const service = new Service({
                 name,
@@ -41,8 +53,7 @@ class ServiceController {
                 .limit(limit)
             const count = await Service.countDocuments({})
             return res.json({count: count, services})
-        }
-        catch(e) {
+        } catch (e) {
             return next(ApiError.internal(e.message))
         }
     }
@@ -50,14 +61,15 @@ class ServiceController {
     async getOne(req, res, next) {
         try {
             const {id} = req.params;
-            if(id === 'search') return next(ApiError.badRequest('Search query cannot be empty!'))
+            if (id === 'search') return next(ApiError.badRequest('Search query cannot be empty!'))
 
             const service = await Service.findById(id);
 
             if (!service) {
                 return next(ApiError.badRequest('Service not found'));
             }
-            return res.json(service);
+            console.log(service.updatedAt)
+            return res.status(200).json(service);
         } catch (e) {
             return next(ApiError.internal(e.message));
         }
@@ -79,17 +91,64 @@ class ServiceController {
 
     async search(req, res, next) {
         try {
-            const { input } = req.params;
+            const {input} = req.params;
             const searchTerm = input.toLowerCase();
             const services = await Service.find({
                 $or: [
-                    { name: { $regex: searchTerm, $options: 'i' } },
-                    { description: { $regex: searchTerm, $options: 'i' } },
+                    {name: {$regex: searchTerm, $options: 'i'}},
+                    {description: {$regex: searchTerm, $options: 'i'}},
                 ],
             });
-            return res.json({ services });
+            return res.json({services});
         } catch (e) {
             return next(ApiError.badRequest(e.message));
+        }
+    }
+
+    async update(req, res, next) {
+        try {
+            const schema = Joi.object({
+                name: Joi.string().required(),
+                description: Joi.string().required(),
+                doctor: Joi.string().required(),
+                price: Joi.number().required()
+            }).unknown(true);
+
+            const {error} = schema.validate(req.body);
+            console.log("here ok")
+            if (error) {
+                console.log("here not ok")
+                return res.status(400).json({message: error.details[0].message});
+            }
+
+            const {name, description, doctor, price} = req.body
+            const {image} = req.files
+
+            let filename = uuid.v4() + ".jpg"
+            await image.mv(path.resolve(__dirname, '..', 'static', filename))
+
+            const {_id} = req.body
+            //const service = new Service()
+
+            const updatedService = await Service.findOneAndUpdate(
+                {_id: new ObjectId(_id)},
+                {
+                    name,
+                    description,
+                    doctor,
+                    price,
+                    img: filename
+                },
+                { new: true, runValidators: true }
+            )
+
+            if (!updatedService) {
+                return res.status(404).json({ message: 'Service not found' });
+            }
+
+            return res.status(200).json({message: 'Service updated successfully', updatedService})
+        } catch (e) {
+            return next(ApiError.internal(e.message));
         }
     }
 }

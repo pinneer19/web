@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const path = require('path')
+const { format } = require('date-fns');
 const serviceSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -22,6 +22,15 @@ const serviceSchema = new mongoose.Schema({
     img: {
         type: String,
         required: true
+    }
+}, {
+    timestamps: {currentTime: () => new Date()},
+    toJSON: {
+        transform(doc, ret) {
+            ret.updatedAt = format(ret.updatedAt, 'yyyy-MM-dd HH:mm:ss');
+            ret.createdAt = format(ret.createdAt, 'yyyy-MM-dd HH:mm:ss');
+            return ret;
+        },
     }
 });
 

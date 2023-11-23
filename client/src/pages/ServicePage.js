@@ -24,6 +24,8 @@ const ServicePage = observer(() => {
                 <p>{service.description}</p>
                 <p>Doctor: {doctor.firstName + ' ' + doctor.lastName + ' ' + doctor.specialization}</p>
                 <p>Price: ${service.price}</p>
+                <p>Created at: {service.createdAt}</p>
+                <p>Updated at: {service.updatedAt}</p>
             </div>
         </div>
     );

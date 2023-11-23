@@ -109,6 +109,22 @@
     font-size: 18px;
     transition: background-color 0.3s ease;
 }
+.modal-buttons div {
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 15px;
+    margin-right: 10px;
+    margin-top: 20px;
+    width: 220px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
 
 input:focus{
     outline: none;
@@ -143,7 +159,7 @@ input:focus{
     margin-bottom: 15px;
 }
 
-.create-modal-buttons button {
+.create-modal-buttons button, .create-modal-buttons div {
     background-color: #2ecc71; /* Green color for Confirm button */
     color: #fff;
     padding: 8px 12px;
@@ -167,7 +183,6 @@ input:focus{
     background-color: #c0392b;
 }
 
-
 .name-create {
     margin: 0 0 20px 26px;
     text-align: center;
@@ -179,4 +194,21 @@ input:focus{
 .name-create:hover {
     transform: scale(0.97);
     background-color: #1b7441;
+}
+
+.select-doctor {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-color: #d8d8d8;
+}
+
+.select-doctor:focus {
+    outline: none;
+}
+
+option:checked,
+option:focus {
+    background-color: lime;
 }

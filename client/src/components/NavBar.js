@@ -10,7 +10,6 @@ import {set} from "mobx";
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
-    const [firstName, setFirstName] = useState('')
     const logoutClick = async () => {
         try {
             await logout()
@@ -21,13 +20,6 @@ const NavBar = observer(() => {
             alert(e.response.data.message)
         }
     }
-    useEffect(() => {
-        getUser()
-            .then(res => {
-                setFirstName(res.data.message.firstName)
-            })
-            .catch(e => console.log(e.message))
-    }, []);
     return (<nav className="navbar">
         <div className="brand">
             <a href="/"><img src={process.env.PUBLIC_URL + '/logo192.png'} height={60}/>Medical
@@ -35,13 +27,12 @@ const NavBar = observer(() => {
         </div>
         <ul className="nav-links">
             <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/api">API</a></li>
         </ul>
         {user.isAuth ? (<div>
             <button className="button" onClick={() => navigate(USER_ROUTE)}>
-                Hello, {firstName}!
+                Hello, {user.user.firstName}!
             </button>
             <button className="button" onClick={() => logoutClick()}>
                 Logout

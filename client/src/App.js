@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import {observer} from "mobx-react-lite";
 import {useContext, useEffect, useState} from "react";
 import {Context} from "./index";
-import {check} from "./http/userAuth";
+import {check, getUser} from "./http/userAuth";
 import Loader from "./components/Loader"
 const App = observer(() => {
     const {user} = useContext(Context)
@@ -12,8 +12,9 @@ const App = observer(() => {
 
     useEffect(() => {
         check()
-            .then(data => {
-                user.setUser(true)
+            .then(async (data) =>  {
+                const response = await getUser()
+                user.setUser(response.data.message)
                 user.setIsAuth(true)
             })
             .catch(_ => {})

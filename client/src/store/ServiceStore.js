@@ -27,12 +27,24 @@ export default class ServiceStore {
     get SelectionDoctor() {
         return this._selectedDoctor
     }
-    updateService(id) {
+    deleteService(id) {
         const indexToDelete = this._services.findIndex(item => item._id === id);
         if (indexToDelete !== -1) {
             this._services.splice(indexToDelete, 1);
         } else {
             console.log('Item not found!');
         }
+    }
+
+    updateService(service, id) {
+        const indexToUpdate = this._services.findIndex(item => item._id === id);
+        if (indexToUpdate !== -1) {
+            this._services[indexToUpdate] = service;
+        } else {
+            console.log('Item not found!');
+        }
+    }
+    addService(service) {
+        this._services.push(service)
     }
 }

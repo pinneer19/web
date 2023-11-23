@@ -1,4 +1,5 @@
 import {$host} from "./index";
+import FormData from "form-data"
 
 export const fetchDoctors = async () => {
     const {data} = await $host.get('api/doctor');
@@ -18,12 +19,45 @@ export const fetchService = async (id) => {
     return {service: serviceData, doctor: doctorResponse.data};
 }
 
-export const searchResult = async function(input) {
-    if(input) {
+export const searchResult = async function (input) {
+    if (input) {
         return await $host.get('api/service/search/' + input);
     }
 }
 
 export const deleteService = async (id) => {
     return await $host.delete('api/service/' + id)
+}
+
+export const addService = async (service) => {
+    let data = new FormData();
+    Object.entries(service).forEach(([key, value]) => {
+        data.append(key, value);
+    });
+    return await $host.post(
+        'api/service/',
+        data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
+    )
+}
+
+export const editService = async (service) => {
+
+    let data = new FormData();
+    Object.entries(service).forEach(([key, value]) => {
+        data.append(key, value);
+    });
+    return await $host.put(
+        'api/service/',
+        data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
+    )
 }
